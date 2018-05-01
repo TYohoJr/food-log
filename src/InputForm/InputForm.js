@@ -4,17 +4,32 @@ import { connect } from 'react-redux';
 import { Input, Button } from "reactstrap";
 
 class InputForm extends React.Component {
+    constructor(){
+        super();
+        this.searchAPI = this.searchAPI.bind(this);
+        this.onAPISearchParameterChange = this.onAPISearchParameterChange.bind(this);
+        this.state = {
+            apiSearchParameter:''
+        }
+    }
 
     // axios.post('/findRoute', { token: localStorage.getItem("token") }).then((result) => {
 
-    // localStorage.setItem('token', result.data.myToken);
+    searchAPI(){
+        console.log(this.state.apiSearchParameter);
+    }
 
+    onAPISearchParameterChange(e){
+        this.setState({
+            apiSearchParameter:e.target.value
+        })
+    }
 
     render() {
         return (
             <div>
-                <Input type="text" />
-                <Button>Search</Button>
+                <Input id="api-search-input" type="text" placeholder="search for food" onChange={this.onAPISearchParameterChange}/>
+                <Button onClick={this.searchAPI}>Search</Button>
             </div>
         )
     }

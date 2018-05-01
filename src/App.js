@@ -14,6 +14,7 @@ export default class App extends Component {
       <Provider store={store} >
         <div className="App">
           <SignInNavbar />
+          <h2 id="app-header">Food Log</h2>
           <InputForm />
         </div>
       </Provider>
