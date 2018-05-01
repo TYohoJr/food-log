@@ -1,11 +1,12 @@
 import { combineReducers } from 'redux';
 // import React from "react";
 
-const userLoginReducer = (state, action) => {
+const userDetailsReducer = (state, action) => {
     if(!state) {
         state = {
             username: "",
-            password: ""
+            password: "",
+            verifyPassword:""
         }
     }
     switch(action.type) {
@@ -19,6 +20,11 @@ const userLoginReducer = (state, action) => {
                 ...state,
                 password: action.password
             }
+        case "onVerifyPasswordChange":
+            return state = {
+                ...state,
+                verifyPassword: action.verifyPassword
+            }
         default:
             return {
                 ...state
@@ -27,5 +33,5 @@ const userLoginReducer = (state, action) => {
 }
 
 export default combineReducers({
-    userLoginReducer: userLoginReducer
+    userDetailsReducer: userDetailsReducer
 });

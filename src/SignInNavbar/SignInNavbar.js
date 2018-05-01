@@ -14,6 +14,7 @@ import {
 import "./SignInNavbar.css";
 import { connect } from 'react-redux';
 import LogIn from "../LogIn/LogIn";
+import SignUp from "../SignUp/SignUp";
 
 class SignInNavbar extends React.Component {
     constructor(props) {
@@ -51,9 +52,9 @@ class SignInNavbar extends React.Component {
                                     {/* <DropdownItem onClick={this.userLogIn}> */}
                                         <LogIn />
                                     {/* </DropdownItem> */}
-                                    <DropdownItem>
-                                        Sign Up
-                                    </DropdownItem>
+                                    {/* <DropdownItem> */}
+                                        <SignUp />
+                                    {/* </DropdownItem> */}
                                     <DropdownItem divider />
                                     <DropdownItem onClick={this.userLogOut}>
                                         Log Out

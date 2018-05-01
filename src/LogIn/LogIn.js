@@ -2,6 +2,7 @@ import React from 'react';
 import "./LogIn.css";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input } from 'reactstrap';
 import { connect } from 'react-redux';
+import axios from "axios";
 
 class LogIn extends React.Component {
   constructor(props) {
@@ -10,45 +11,54 @@ class LogIn extends React.Component {
     this.showPasword = this.showPasword.bind(this);
     this.onUsernameChange = this.onUsernameChange.bind(this);
     this.onPasswordChange = this.onPasswordChange.bind(this);
+    this.userLogIn = this.userLogIn.bind(this);
     this.state = {
       modal: false,
-      showPasswordText:"password",
-      username:"",
-      password:""
+      showPasswordText: "password",
+      username: "",
+      password: ""
     };
   }
 
+  userLogIn() {
+    axios.post("userLogIn", { userDetails: this.props.userDetailsReducer }).then((result) => {
+      localStorage.setItem('token', result.data.myToken);
+      alert("You have successfully logged in!");
+      this.setState({
+        modal: !this.state.modal
+      });
+    })
+  }
+
   toggle() {
-    console.log(this.props.userLoginReducer);
     this.setState({
       modal: !this.state.modal
     });
   }
 
-  showPasword(){
-    if(this.state.showPasswordText === "password"){
+  showPasword() {
+    if (this.state.showPasswordText === "password") {
       this.setState({
-        showPasswordText:"text"
+        showPasswordText: "text"
       })
     } else {
       this.setState({
-        showPasswordText:"password"
+        showPasswordText: "password"
       })
     }
-   
   }
 
-  onUsernameChange(e){
+  onUsernameChange(e) {
     this.props.dispatch({
-      type:"onUsernameChange",
-      username:e.target.value
+      type: "onUsernameChange",
+      username: e.target.value
     })
   }
 
-  onPasswordChange(e){
+  onPasswordChange(e) {
     this.props.dispatch({
-      type:"onPasswordChange",
-      password:e.target.value
+      type: "onPasswordChange",
+      password: e.target.value
     })
   }
 
@@ -60,13 +70,13 @@ class LogIn extends React.Component {
           <ModalHeader toggle={this.toggle}>Log In</ModalHeader>
           <ModalBody>
             <p>Username:</p>
-            <Input className="log-in-input" type="text" placeholder="username" onChange={this.onUsernameChange}/>
+            <Input className="log-in-input" type="text" placeholder="username" onChange={this.onUsernameChange} />
             <p>Password:</p>
-            <Input className="log-in-input" type={this.state.showPasswordText} placeholder="password" onChange={this.onPasswordChange}/>
-            <span id="checkbox-div"><Input type="checkbox" onClick={this.showPasword}/>{' Show Password '}</span>
+            <Input className="log-in-input" type={this.state.showPasswordText} placeholder="password" onChange={this.onPasswordChange} />
+            <span id="checkbox-div"><Input type="checkbox" onClick={this.showPasword} />{' Show Password '}</span>
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.toggle}>Log In</Button>{' '}
+            <Button color="primary" onClick={this.userLogIn}>Log In</Button>{' '}
           </ModalFooter>
         </Modal>
       </div>
