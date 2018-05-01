@@ -1,0 +1,15 @@
+.log-in-input {
+    width: 200px!important;
+}
+
+.modal-dialog {
+    width: 300px!important;
+}
+
+#show-password-checkbox {
+    /* margin-left: 0; */
+}
+
+#checkbox-div {
+    margin-left: 18px;
+}

@@ -1,17 +1,23 @@
 import { combineReducers } from 'redux';
 // import React from "react";
 
-// Change the component that is the current tab being displayed
-const activePageReducer = (state, action) => {
-    if (!state) {
+const userLoginReducer = (state, action) => {
+    if(!state) {
         state = {
-            activePage: "Current active page",
+            username: "",
+            password: ""
         }
     }
-    switch (action.type) {
-        case "changeActivePage":
+    switch(action.type) {
+        case "onUsernameChange":
             return state = {
-                activePage: action.activePage
+                ...state,
+                username: action.username
+            }
+        case "onPasswordChange":
+            return state = {
+                ...state,
+                password: action.password
             }
         default:
             return {
@@ -21,5 +27,5 @@ const activePageReducer = (state, action) => {
 }
 
 export default combineReducers({
-    activePageReducer: activePageReducer,
+    userLoginReducer: userLoginReducer
 });

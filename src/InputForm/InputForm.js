@@ -4,6 +4,12 @@ import { connect } from 'react-redux';
 import { Input, Button } from "reactstrap";
 
 class InputForm extends React.Component {
+
+    // axios.post('/findRoute', { token: localStorage.getItem("token") }).then((result) => {
+
+    // localStorage.setItem('token', result.data.myToken);
+
+
     render() {
         return (
             <div>

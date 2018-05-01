@@ -4,20 +4,22 @@ import {
     Navbar,
     NavbarToggler,
     Nav,
-    NavItem,
-    NavLink,
+    // NavItem,
+    // NavLink,
     UncontrolledDropdown,
     DropdownToggle,
     DropdownMenu,
     DropdownItem
 } from 'reactstrap';
+import "./SignInNavbar.css";
 import { connect } from 'react-redux';
+import LogIn from "../LogIn/LogIn";
 
 class SignInNavbar extends React.Component {
     constructor(props) {
         super(props);
         this.toggle = this.toggle.bind(this);
-        this.userLogIn = this.userLogIn.bind(this);
+        this.userLogOut = this.userLogOut.bind(this);
         this.state = {
             isOpen: false
         };
@@ -27,8 +29,9 @@ class SignInNavbar extends React.Component {
             isOpen: !this.state.isOpen
         });
     }
-    userLogIn(){
-        debugger
+    userLogOut() {
+        localStorage.clear();
+        window.location.href = '/'
     }
     render() {
         return (
@@ -45,14 +48,14 @@ class SignInNavbar extends React.Component {
                                     Account
                                 </DropdownToggle>
                                 <DropdownMenu right>
-                                    <DropdownItem onClick={this.userLogIn}>
-                                        Log In
-                                    </DropdownItem>
+                                    {/* <DropdownItem onClick={this.userLogIn}> */}
+                                        <LogIn />
+                                    {/* </DropdownItem> */}
                                     <DropdownItem>
                                         Sign Up
                                     </DropdownItem>
                                     <DropdownItem divider />
-                                    <DropdownItem>
+                                    <DropdownItem onClick={this.userLogOut}>
                                         Log Out
                                     </DropdownItem>
                                 </DropdownMenu>
