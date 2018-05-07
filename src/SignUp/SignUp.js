@@ -23,11 +23,15 @@ class SignUp extends React.Component {
                 axios.post("userSignUp", { userDetails: this.props.userDetailsReducer }).then((result) => {
                     console.log(result.data);
                     axios.post("userLogIn", { userDetails: this.props.userDetailsReducer }).then((result2) => {
-                        localStorage.setItem('token', result2.data.myToken);
-                        alert("You have successfull signed up and have been automatically logged in!");
-                        this.setState({
-                            modal: !this.state.modal
-                        });
+                        if (result.data.duplicateCheck) {
+                            alert(result.data.message);
+                        } else {
+                            localStorage.setItem('token', result2.data.myToken);
+                            alert("You have successfull signed up and have been automatically logged in!");
+                            this.setState({
+                                modal: !this.state.modal
+                            });
+                        }
                     })
                 })
             } else {

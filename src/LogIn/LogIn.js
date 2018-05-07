@@ -22,11 +22,18 @@ class LogIn extends React.Component {
 
   userLogIn() {
     axios.post("userLogIn", { userDetails: this.props.userDetailsReducer }).then((result) => {
-      localStorage.setItem('token', result.data.myToken);
-      alert("You have successfully logged in!");
-      this.setState({
-        modal: !this.state.modal
-      });
+      if (result.data.myToken) {
+        localStorage.setItem('token', result.data.myToken);
+        alert(result.data.message);
+        this.setState({
+          modal: !this.state.modal
+        });
+        this.props.dispatch({
+          type: "userLoggedIn"
+        });
+      } else {
+        alert(result.data.message);
+      }
     })
   }
 

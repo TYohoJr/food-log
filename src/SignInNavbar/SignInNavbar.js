@@ -32,12 +32,21 @@ class SignInNavbar extends React.Component {
     }
     userLogOut() {
         localStorage.clear();
+        this.props.dispatch({
+            type: "userLoggedOut"
+        })
         window.location.href = '/'
     }
     render() {
+        if (localStorage.getItem("token")) {
+            console.log("logged in");
+        } else {
+            console.log("not logged in");
+        }
         return (
             <div>
                 <Navbar color="light" light expand="md">
+                    <h3>{this.props.loggedInCheckerReducer.loggedInCheck}</h3>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
@@ -50,10 +59,10 @@ class SignInNavbar extends React.Component {
                                 </DropdownToggle>
                                 <DropdownMenu right>
                                     {/* <DropdownItem onClick={this.userLogIn}> */}
-                                        <LogIn />
+                                    <LogIn />
                                     {/* </DropdownItem> */}
                                     {/* <DropdownItem> */}
-                                        <SignUp />
+                                    <SignUp />
                                     {/* </DropdownItem> */}
                                     <DropdownItem divider />
                                     <DropdownItem onClick={this.userLogOut}>

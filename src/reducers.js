@@ -1,15 +1,37 @@
 import { combineReducers } from 'redux';
 // import React from "react";
 
+const loggedInCheckerReducer = (state, action) => {
+    if (!state) {
+        state = {
+            loggedInCheck: "Welcome to Food Log\nPlease Log In"
+        }
+    }
+    switch (action.type) {
+        case "userLoggedIn":
+            return state = {
+                loggedInCheck: "Welcome to Food Log!"
+            }
+        case "userLoggedOut":
+            return state = {
+                loggedInCheck: "Welcome to Food Log\nPlease Log In"
+            }
+        default:
+            return state = {
+                ...state
+            }
+    }
+}
+
 const userDetailsReducer = (state, action) => {
-    if(!state) {
+    if (!state) {
         state = {
             username: "",
             password: "",
-            verifyPassword:""
+            verifyPassword: ""
         }
     }
-    switch(action.type) {
+    switch (action.type) {
         case "onUsernameChange":
             return state = {
                 ...state,
@@ -33,5 +55,6 @@ const userDetailsReducer = (state, action) => {
 }
 
 export default combineReducers({
-    userDetailsReducer: userDetailsReducer
+    userDetailsReducer: userDetailsReducer,
+    loggedInCheckerReducer: loggedInCheckerReducer
 });
